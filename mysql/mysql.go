@@ -17,7 +17,8 @@ func InitMysql() *gorm.DB {
 		panic("failed to connect database , err: " + err.Error())
 	}
 
-	db.AutoMigrate(&models.Menu{}, &models.Plug{}, &models.DownHistory{},&models.User{})
+	db.AutoMigrate(&models.Menu{}, &models.Plug{}, &models.DownHistory{}, &models.User{})
+	db.LogMode(true)
 
 	return db
 }

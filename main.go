@@ -16,8 +16,8 @@ func main() {
 
 	r.Use(Cors())
 
-	r.Static("/static", "./static_file/dist/")
-	r.LoadHTMLGlob("./static_file/dist/*.html")
+	//r.Static("/static", "./static_file/dist/")
+	//r.LoadHTMLGlob("./static_file/dist/*.html")
 
 	r = router.RouterCollection(r)
 

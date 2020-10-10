@@ -51,6 +51,7 @@ func GetPlugByMid(c *gin.Context) {
 		fmt.Print("s%", perr)
 	}
 	c.JSON(200, gin.H{"data": plist, "allpage": page_num})
+	return
 }
 
 func GetPlugsByMidHot(c *gin.Context) {
@@ -71,6 +72,7 @@ func GetPlugsByMidHot(c *gin.Context) {
 	}
 
 	c.JSON(200, gin.H{"data": res})
+	return
 }
 
 func DownloadAdd(c *gin.Context) {
@@ -86,8 +88,10 @@ func DownloadAdd(c *gin.Context) {
 	if err != nil {
 		fmt.Printf("s%", err)
 		c.JSON(200, gin.H{"data": "fail"})
+		return
 	} else {
 		c.JSON(200, gin.H{"data": "success"})
+		return
 	}
 	fmt.Printf("s%", getp)
 }
@@ -98,9 +102,10 @@ func GetPlugByKeyWord(c *gin.Context) {
 	res, err := common.GetPlugByKeyWord(keywords)
 	if err != nil {
 		c.JSON(400, gin.H{"data": "false"})
-
+		return
 	} else {
 		c.JSON(200, gin.H{"data": res})
+		return
 	}
 }
 
@@ -283,4 +288,36 @@ func DeleteOnePlug(c *gin.Context) {
 		c.JSON(200, gin.H{"code": 0, "msg": "删除成功！"})
 		return
 	}
+}
+
+func GetAllPlug(c *gin.Context) {
+	var err error
+	count := 0
+	pageSize := 20
+
+	page := c.Query("page")
+
+	count, err = common.GetPlugCount()
+	page_num := int(math.Ceil(float64(count) / float64(pageSize)))
+
+	if err != nil {
+		pageSize = 0
+		page_num = 0
+	}
+
+	rpage, _ := strconv.Atoi(page)
+	if rpage <= 1 {
+		rpage = 1
+	} else if rpage >= page_num {
+		rpage = page_num
+	}
+
+	//rmid,_:=strconv.Atoi(mid)
+
+	plist, perr := common.GetPlugLimit(rpage, pageSize)
+	if perr != nil {
+		fmt.Print("s%", perr)
+	}
+	c.JSON(200, gin.H{"data": plist, "allpage": page_num})
+	return
 }

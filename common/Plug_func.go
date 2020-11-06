@@ -21,6 +21,14 @@ func GetPlugByMidLimit(idList []string, page int, size int) (plist []models.Plug
 	return plist, nil
 }
 
+func GetPlugLimit(page int, size int) (plist []models.Plug, err error) {
+	err = db.Limit(size).Offset((page - 1) * size).Find(&plist).Error
+	if err != nil {
+		return nil, err
+	}
+	return plist, nil
+}
+
 func GetPlugByMidCount(idList []string) (count int, err error) {
 	model := db.Model(&models.Plug{})
 
@@ -33,6 +41,11 @@ func GetPlugByMidCount(idList []string) (count int, err error) {
 	}
 
 	err = model.Count(&count).Error
+	return
+}
+
+func GetPlugCount() (count int, err error) {
+	err = db.Model(&models.Plug{}).Count(&count).Error
 	return
 }
 

@@ -69,6 +69,7 @@ type result struct {
 	Name string `json:name`
 	Children []models.Menu `json:"children"`
 	Url string `json:"url"`
+	M_l_id int `m_l_id`
 }
 
 

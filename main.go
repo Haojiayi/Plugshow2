@@ -21,7 +21,7 @@ func main() {
 
 	r = router.RouterCollection(r)
 
-	r.Run(":8010")
+	r.Run(":6012")
 }
 
 func Cors() gin.HandlerFunc {

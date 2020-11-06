@@ -104,7 +104,7 @@ func GetPlugByKeyWord(c *gin.Context) {
 	}
 }
 
-func test() {
+func GetAllPlug(c *gin.Context) {
 
 }
 

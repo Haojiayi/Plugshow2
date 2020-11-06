@@ -16,7 +16,7 @@ func ReturnMenu(c *gin.Context){
 	}
 	for _,y :=range flist{
 		clist,_:=common.GetChildrenMenuByFid(int(y.ID))
-		resultlist=append(resultlist, result{Mid:int(y.ID),Name:y.Name,Children:clist,Url:y.M_url})
+		resultlist=append(resultlist, result{Mid:int(y.ID),Name:y.Name,Children:clist,Url:y.M_url,M_l_id:y.M_l_id})
 	}
 	//
 	fmt.Printf("s%","s%","s%",flist)
